@@ -1,0 +1,26 @@
+.card{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+}
+.btn{
+    background: rgb(78, 169, 212);
+    padding: 5px;
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    margin-left: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center; 
+}
