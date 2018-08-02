@@ -1,37 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { WordDisplayService } from './word-display.service';
-
+import { AddSpaces } from './../shared/add-spaces.pipe';
 @Component({
   selector: 'app-word-display',
   templateUrl: './word-display.component.html',
   styleUrls: ['./word-display.component.css']
 })
 export class WordDisplayComponent implements OnInit {
-  public word: string;
-  public wordOnBoard: string;
+  public words: string[];
+  public displayWordList: string[];
   constructor(private wordDisplayService: WordDisplayService) {
    }
 
   ngOnInit() {
-    this.wordOnBoard = '';
-    this.setBlank();
-    this.word = this.wordDisplayService.wordToGuess;
-    console.log(this.word.length);
+    this.displayWordList = [];
+    this.words = this.wordDisplayService.wordToGuess.split(' ');
+    console.log('Words are');
+    console.log(this.words);
+    for (const word of this.words) {
+      this.displayWordList.push(word.toLowerCase().replace(/[a-z]/g, '-'));
+    }
+    console.log(this.displayWordList);
   }
 
   public setBlank() {
-    for (let i = 0 ; i < this.word.length ; i++) {
-      this.wordOnBoard.concat('_');
-    }
- /*    for (const letter of this.word) {
-      console.log(letter);
-      if (letter === ' ') {
-        this.wordOnBoard.concat(' ');
-      } else {
-        this.wordOnBoard.concat('_');
-      }
-    }
-    console.log(this.wordOnBoard);
-  } */
   }
 }

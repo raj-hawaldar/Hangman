@@ -1,4 +1,5 @@
-<div class="container alert alert-info">
-<h1>{{wordOnBoard}}</h1>
-<button (click)="setBlank()">Click Me!</button>
+<div class="container alert alert-info wordboard">
+     <div class="card-body display-2" *ngFor="let word of displayWordList">
+         {{word | addSpaces}}
+     </div>
 </div>

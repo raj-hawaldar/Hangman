@@ -1,3 +1,4 @@
+import { WordDisplayService } from './../word-display/word-display.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Button } from './../shared/button';
@@ -28,7 +29,7 @@ export class ButtonBoardComponent implements OnInit {
    * @param {ButtonService} buttonService
    * @memberof ButtonBoardComponent
    */
-  constructor(private buttonService: ButtonService) { }
+  constructor(private buttonService: ButtonService, private wordDisplayService: WordDisplayService) { }
 
   /**
    *
@@ -37,5 +38,18 @@ export class ButtonBoardComponent implements OnInit {
    */
   ngOnInit() {
     this.buttons = this.buttonService.buttons;
+  }
+
+
+  /**
+   *
+   *
+   * @memberof ButtonBoardComponent
+   */
+  public checkWord(button: Button): void {
+    console.log(button.value);
+    let index: any[];
+    index = this.wordDisplayService.getAllIndexes(button.value);
+    console.log('Value is ' + index);
   }
 }

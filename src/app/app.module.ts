@@ -1,3 +1,4 @@
+import { AddSpaces } from './shared/add-spaces.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -11,7 +12,8 @@ import { ScoreBoardComponent } from './score-board/score-board.component';
     AppComponent,
     ButtonBoardComponent,
     WordDisplayComponent,
-    ScoreBoardComponent
+    ScoreBoardComponent,
+    AddSpaces
   ],
   imports: [BrowserModule],
   providers: [],

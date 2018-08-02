@@ -2,3 +2,10 @@
     background-color: aliceblue;
     text-align: center;
 }
+.wordboard{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    align-items: center;
+}
