@@ -17,6 +17,7 @@ export class ButtonService {
       const button = new Button();
       button.isCorrect = null;
       button.isEnabled = true;
+      button.isWrong = null;
       button.value = String.fromCharCode(i);
       this.buttons.push(button);
     }

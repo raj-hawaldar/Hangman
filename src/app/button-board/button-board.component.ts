@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Button } from './../shared/button';
 import { ButtonService } from './button.service';
+import { EventEmitter, Output } from '@angular/core';
 
 /**
  *
@@ -17,6 +18,8 @@ import { ButtonService } from './button.service';
   styleUrls: ['./button-board.component.css']
 })
 export class ButtonBoardComponent implements OnInit {
+   @Output() valueChange = new EventEmitter();
+  public words: string;
   /**
    *
    *
@@ -38,8 +41,8 @@ export class ButtonBoardComponent implements OnInit {
    */
   ngOnInit() {
     this.buttons = this.buttonService.buttons;
+    this.wordDisplayService.displayWords.subscribe( data => this.words = data );
   }
-
 
   /**
    *
@@ -47,9 +50,16 @@ export class ButtonBoardComponent implements OnInit {
    * @memberof ButtonBoardComponent
    */
   public checkWord(button: Button): void {
-    console.log(button.value);
+    button.isEnabled = false;
     let index: any[];
     index = this.wordDisplayService.getAllIndexes(button.value);
-    console.log('Value is ' + index);
+    if (index.length === 0 ) {
+      button.isWrong = true;
+    } else {
+      button.isCorrect = true;
+      this.wordDisplayService.change(index, button.value);
+    }
+    this.wordDisplayService.displayWords.subscribe( data => this.words = data );
+    this.valueChange.emit(this.words);
   }
 }

@@ -1,5 +1,6 @@
 <div class="container alert alert-info wordboard">
-     <div class="card-body display-2" *ngFor="let word of displayWordList">
+     <div class="card-body display-2" *ngFor="let word of words">
          {{word | addSpaces}}
      </div>
 </div>
+<app-button-board (valueChange)="changeString($event)"></app-button-board>

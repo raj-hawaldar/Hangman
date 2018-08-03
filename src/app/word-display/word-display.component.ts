@@ -8,21 +8,19 @@ import { AddSpaces } from './../shared/add-spaces.pipe';
 })
 export class WordDisplayComponent implements OnInit {
   public words: string[];
-  public displayWordList: string[];
+  public displayWord: string;
   constructor(private wordDisplayService: WordDisplayService) {
-   }
-
-  ngOnInit() {
-    this.displayWordList = [];
-    this.words = this.wordDisplayService.wordToGuess.split(' ');
-    console.log('Words are');
-    console.log(this.words);
-    for (const word of this.words) {
-      this.displayWordList.push(word.toLowerCase().replace(/[a-z]/g, '-'));
-    }
-    console.log(this.displayWordList);
   }
 
-  public setBlank() {
+  ngOnInit() {
+    this.wordDisplayService.displayWords.subscribe(data => this.displayWord = data);
+    this.words = this.displayWord.split(' ');
+  }
+  public test() {
+    alert(this.words);
+  }
+  public changeString(value: string) {
+    this.displayWord = value;
+    this.words = this.displayWord.split(' ');
   }
 }
