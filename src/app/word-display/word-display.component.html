@@ -3,4 +3,8 @@
          {{word | addSpaces}}
      </div>
 </div>
-<app-button-board (valueChange)="changeString($event)"></app-button-board>
+<app-button-board (valueChange)="changeString($event)" (attemptLoss)="setAttempts($event)"></app-button-board>
+<div class="alert alert-primary">
+    <span *ngFor="let status of attempts" class="life" [ngClass]="{'dead': !status }">
+    </span>
+</div>

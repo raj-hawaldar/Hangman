@@ -1,9 +1,9 @@
 import { WordDisplayService } from './../word-display/word-display.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 import { Button } from './../shared/button';
 import { ButtonService } from './button.service';
-import { EventEmitter, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 /**
  *
@@ -18,7 +18,9 @@ import { EventEmitter, Output } from '@angular/core';
   styleUrls: ['./button-board.component.css']
 })
 export class ButtonBoardComponent implements OnInit {
-   @Output() valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter();
+  @Output() attemptLoss = new EventEmitter();
+
   public words: string;
   /**
    *
@@ -41,7 +43,7 @@ export class ButtonBoardComponent implements OnInit {
    */
   ngOnInit() {
     this.buttons = this.buttonService.buttons;
-    this.wordDisplayService.displayWords.subscribe( data => this.words = data );
+    this.wordDisplayService.displayWords.subscribe(data => this.words = data);
   }
 
   /**
@@ -53,13 +55,14 @@ export class ButtonBoardComponent implements OnInit {
     button.isEnabled = false;
     let index: any[];
     index = this.wordDisplayService.getAllIndexes(button.value);
-    if (index.length === 0 ) {
+    if (index.length === 0) {
       button.isWrong = true;
+      this.attemptLoss.emit(this.words);
     } else {
       button.isCorrect = true;
       this.wordDisplayService.change(index, button.value);
     }
-    this.wordDisplayService.displayWords.subscribe( data => this.words = data );
+    this.wordDisplayService.displayWords.subscribe(data => this.words = data);
     this.valueChange.emit(this.words);
   }
 }
